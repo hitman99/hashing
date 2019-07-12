@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hashingapi
+  namespace: hashing
+spec:
+  selector:
+    matchLabels:
+      app: hashing
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hashing
+    spec:
+      containers:
+        - name: app
+          image: hitman99/hashingapi
+          ports:
+            - name: http
+              containerPort: 80
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "50m"
+            limits:
+              memory: "32Mi"
+              cpu: "50m"
