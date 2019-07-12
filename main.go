@@ -1,9 +1,9 @@
 package main
 
 import (
-    "fmt"
+    "github.com/hitman99/hashing/cmd"
 )
 
 func main() {
-    fmt.Print("Hello world - the classic")
+    cmd.Execute()
 }
