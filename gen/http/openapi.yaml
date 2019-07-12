@@ -34,7 +34,7 @@ paths:
       - http
   /openapi.json:
     get:
-      summary: Download ./gen/http/openapi.json
+      summary: Download ./static/openapi.json
       operationId: hashing#/openapi.json
       responses:
         "200":

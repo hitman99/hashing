@@ -58,7 +58,7 @@ func New(
 			{"Md5", "GET", "/md5/{string}"},
 			{"Sha1", "GET", "/sha1/{string}"},
 			{"Sha384", "GET", "/sha384/{string}"},
-			{"./gen/http/openapi.json", "GET", "/openapi.json"},
+			{"./static/openapi.json", "GET", "/openapi.json"},
 		},
 		Sha256: NewSha256Handler(e.Sha256, mux, dec, enc, eh),
 		Sha512: NewSha512Handler(e.Sha512, mux, dec, enc, eh),
@@ -87,8 +87,8 @@ func Mount(mux goahttp.Muxer, h *Server) {
 	MountMd5Handler(mux, h.Md5)
 	MountSha1Handler(mux, h.Sha1)
 	MountSha384Handler(mux, h.Sha384)
-	MountGenHTTPOpenapiJSON(mux, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "./gen/http/openapi.json")
+	MountStaticOpenapiJSON(mux, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./static/openapi.json")
 	}))
 }
 
@@ -352,8 +352,8 @@ func NewSha384Handler(
 	})
 }
 
-// MountGenHTTPOpenapiJSON configures the mux to serve GET request made to
+// MountStaticOpenapiJSON configures the mux to serve GET request made to
 // "/openapi.json".
-func MountGenHTTPOpenapiJSON(mux goahttp.Muxer, h http.Handler) {
+func MountStaticOpenapiJSON(mux goahttp.Muxer, h http.Handler) {
 	mux.Handle("GET", "/openapi.json", h.ServeHTTP)
 }

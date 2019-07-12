@@ -78,7 +78,7 @@ var _ = Service("hashing", func() {
         })
     })
 
-    Files("/openapi.json", "./gen/http/openapi.json")
+    Files("/openapi.json", "./static/openapi.json")
 })
 
 var HashingResult = ResultType("HashingResult", func(){
