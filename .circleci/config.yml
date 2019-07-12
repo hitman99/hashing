@@ -1,0 +1,49 @@
+# build only tags
+only-tags: &only-tags
+  filters:
+    tags:
+      only: /.*/
+    branches:
+      ignore: /.*/
+
+# Golang CircleCI 2.0 configuration file
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.12
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout
+      - run:
+          name: build and push docker image
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker build -t hitman99/hashing:$CIRCLE_TAG .
+            docker build -t hitman99/hashing:latest .
+            docker push hitman99/hashing:$CIRCLE_TAG
+            docker push hitman99/hashing:latest
+  deploy:
+    docker:
+      - image: movetokube/kubectl:1.14.1
+    steps:
+      - run:
+          name: update kubernetes deployment
+          command: |
+            mkdir -p ~/.kube
+            touch ~/.kube/config
+            echo ${KUBECONFIG_CIRCLECI} | base64 -d >> ~/.kube/config
+            kubectl set image deployment hashingapi app=hitman99/hashing:$CIRCLE_TAG
+
+
+workflows:
+  version: 2
+  # This only runs on deploy tags and not branches
+  tagged-build:
+    jobs:
+      - build: *only-tags
+      - deploy:
+          <<: *only-tags
+          requires:
+            - build
