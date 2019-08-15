@@ -4,7 +4,7 @@ only-tags: &only-tags
     tags:
       only: /.*/
     branches:
-      ignore: /.*/
+      only: /.*/
 
 # Golang CircleCI 2.0 configuration file
 version: 2
