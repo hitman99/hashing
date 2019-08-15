@@ -12,7 +12,7 @@ Supported hashes (and corresponding endpoints):
 To get a hash of your string, use the appropriate endpoint and provide a string like so:
 ```shell script
 $ curl https://hashing.movetokube.com/sha1/whatever
-{"type":"Sha1","hash":"da39a3ee5e6b4b0d3255bfef95601890afd80709"}
+{"type":"Sha1","hash":"d869db7fe62fb07c25a0403ecaea55031744b5fb"}
 ```
 
 You'll get a JSON string in the response. The uppercased hash type in `type` field
