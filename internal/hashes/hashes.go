@@ -29,6 +29,7 @@ func GetHash(kind, text string) (*string, error) {
 	default:
 		return nil, errors.New("unsupported hashing algorithm")
 	}
-	hashed = hex.EncodeToString(h.Sum([]byte(text)))
+	h.Write([]byte(text))
+	hashed = hex.EncodeToString(h.Sum(nil))
 	return &hashed, nil
 }
