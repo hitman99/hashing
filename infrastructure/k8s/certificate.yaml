@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: hashingapi
+  namespace: movetokube
+spec:
+  secretName: hashing-tls
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  commonName: hashing.movetokube.com
+  dnsNames:
+    - hashing.movetokube.com
+  acme:
+    config:
+      - dns01:
+          provider: prod-dns
+        domains:
+          - hashing.movetokube.com

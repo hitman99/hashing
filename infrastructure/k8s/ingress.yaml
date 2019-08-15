@@ -2,7 +2,7 @@ kind: Ingress
 apiVersion: networking.k8s.io/v1beta1
 metadata:
   name: hashing
-  namespace: hashing
+  namespace: movetokube
   annotations:
     ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
