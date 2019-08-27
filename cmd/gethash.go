@@ -35,12 +35,24 @@ var sha512 = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		hashIt(strings.Title(cmd.Name()), args[0])
 	},
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return errors.New("requires string to hash")
+		}
+		return nil
+	},
 }
 var md5 = &cobra.Command{
 	Use:   "md5",
 	Short: "makes md5 hash",
 	Run: func(cmd *cobra.Command, args []string) {
 		hashIt(strings.Title(cmd.Name()), args[0])
+	},
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return errors.New("requires string to hash")
+		}
+		return nil
 	},
 }
 var sha1 = &cobra.Command{
@@ -49,12 +61,24 @@ var sha1 = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		hashIt(strings.Title(cmd.Name()), args[0])
 	},
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return errors.New("requires string to hash")
+		}
+		return nil
+	},
 }
 var sha384 = &cobra.Command{
 	Use:   "sha384",
 	Short: "makes sha384 hash",
 	Run: func(cmd *cobra.Command, args []string) {
 		hashIt(strings.Title(cmd.Name()), args[0])
+	},
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return errors.New("requires string to hash")
+		}
+		return nil
 	},
 }
 
